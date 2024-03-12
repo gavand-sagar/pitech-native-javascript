@@ -1,47 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
-
-function LowerCaseText(props){
-  return (
-    <Text>{props.text.toLowerCase()}</Text>
-  );
-}
-
-function Rating(props){
-
-  let str = ""
-
-  for (let index = 0; index < props.value; index++) {
-    str+= "❤️"    
-  }
-
-
-  return (
-    <Text>{str}</Text>
-  )
-}
-
-
+import { StatusBar, StyleSheet, View } from 'react-native';
+import ProductList from './ProductList';
+import Child1 from './Child1';
+import CallToApi from './CallToApi';
+import { Provider } from 'react-redux';
+import { store } from './store';
 export default function App() {
+
+  let paddingFromTop = StatusBar.currentHeight ;
+
   return (
-    <View style={styles.container}>
-      <LowerCaseText text={"SAGAR"}/>
-      <LowerCaseText text={"Amit"}/>
-      <LowerCaseText text={"Jay"}/>
-
-      <Rating value={3}/>
-      <Rating value={2}/>
-      <Rating value={5}/>
-
+    <View style={{...styles.container,paddingTop:paddingFromTop}}>
+       <Provider store={store}>
+            <Child1/>
+            <ProductList/>
+       </Provider>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    color: 'red',
+  }
 });
